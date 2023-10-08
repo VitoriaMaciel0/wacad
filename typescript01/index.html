@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembretes/To Do List</title>
+    <script src="/src/index.js"></script>
+</head>
+<body>
+    <h1>Lembretes/To Do List</h1>
+    <h2>Adicionar Lembrete</h2>
+    <form id="adicionar-form">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" required>  
+        <label for="data-insercao">Data de Inserção:</label>
+        <input type="datetime-local" id="data-insercao" required>
+        <label for="data-limite">Data Limite:</label>
+        <input type="datetime-local" id="data-limite" required>
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" rows="4" required></textarea>
+        <button type="submit">Adicionar</button>
+    </form>
+    <h2>Lembretes</h2>
+    <ul id="lista-lembretes"></ul>
+</body>
+</html>

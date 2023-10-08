@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatísticas da Turma</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <h1>Estatísticas da Turma</h1>
+    <h2>Adicionar Aluno</h2>
+    <form id="adicionar-aluno-form">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" required>
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" required>
+        <label for="altura">Altura (em metros):</label>
+        <input type="number" id="altura" step="0.01" required>
+        <label for="peso">Peso (em kg):</label>
+        <input type="number" id="peso" step="0.01" required>
+        <button type="submit">Adicionar Aluno</button>
+    </form>
+    <h2>Lista de Alunos</h2>
+    <ul id="lista-alunos">
+    </ul>
+    <h2>Estatísticas da Turma</h2>
+    <p>Número de Alunos: <span id="num-alunos">0</span></p>
+    <p>Média de Idades: <span id="media-idades">0</span></p>
+    <p>Média de Alturas: <span id="media-alturas">0</span> cm</p>
+    <p>Média de Pesos: <span id="media-pesos">0</span> kg</p>
+<form id="editar-aluno-form" style="display: none;">
+    <label for="aluno-id-edit">ID:</label>
+    <input type="text" id="aluno-id-edit" readonly>
+    <label for="nome-edit">Nome:</label>
+    <input type="text" id="nome-edit" required>
+    <label for="idade-edit">Idade:</label>
+    <input type="number" id="idade-edit" required>
+    <label for="altura-edit">Altura (em metros):</label>
+    <input type="number" id="altura-edit" step="0.01" required>
+    <label for="peso-edit">Peso (em kg):</label>
+    <input type="number" id="peso-edit" step="0.01" required>
+    <button type="submit" id="cancelar-edicao">Cancelar Edição</button>
+    <button type="submit">Salvar</button>
+</form>  
+    <script src="/src/index.js"></script>
+</body>
+</html>
