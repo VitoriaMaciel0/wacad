@@ -1,0 +1,13 @@
+$color: blue;
+
+h2 {
+    color: $color;
+}
+
+
+#header 
+{
+    .tittle {
+        color: red($color: #000000);
+}
+}

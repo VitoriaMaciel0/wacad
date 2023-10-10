@@ -1,0 +1,10 @@
+{
+"name": "hello-world",
+"author": "Vitoria Beatriz",
+"private": true,
+"version": "0.0.1",
+"dependencies": {},
+"scripts": {
+    "start": "node src/index.js",
+    "start:prod": "node src/index.js"
+}}
