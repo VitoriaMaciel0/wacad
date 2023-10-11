@@ -30,9 +30,12 @@ app.set("views", `${__dirname}/views`);
 app.use(logger('complexo'));
 
 app.use('/img', express.static('${_dirname}/../public/img'));
-app.use('/js', express.static('${_dirname}/../public/js'));
 app.use('/css', express.static('${_dirname}/../public/css'));
 app.use('/webfonts', express.static('${_dirname}/../node_modules/@fortawesome'));
+app.use('/js', [
+  express.static(`${__dirname}/../public/js`),
+  express.static(`${__dirname}/../node_modules/bootstrap/dist/js/`)
+  ]);
 
 
 app.use(router);

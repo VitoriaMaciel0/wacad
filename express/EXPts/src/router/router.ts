@@ -12,5 +12,6 @@ router.get('/hb4', mainController.hb4);
 router.get("/lorem/:paragrafos", mainController.lorem);
 router.get("/about", mainController.sobre);
 router.get("/pagina-com-imagem", mainController.img);
+router.get("/ui", mainController.ui);
 
 export default router;
