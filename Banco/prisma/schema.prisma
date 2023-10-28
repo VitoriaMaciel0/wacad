@@ -1,0 +1,92 @@
+// schema.prisma
+
+// Define o provedor de banco de dados
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Cliente {
+  ID_Cliente      Int        @id @map("ID_Cliente")
+  NomeCli         String?    @map("NomeCli")
+  CpfCli          String?    @unique @map("CpfCli")
+  celular         String?    @map("celular")
+  email           String?    @map("email")
+  Data_nascimento DateTime?  @map("Data_nascimento")
+  // Relacionamento com a tabela Endereço
+  enderecos       Endereco[] @relation("Cliente_Endereco")
+  Compra          Compra[]
+}
+
+model Endereco {
+  idEndereco Int      @id @map("idEndereco")
+  Cidade     String?  @map("Cidade")
+  Cep        String?  @map("Cep")
+  Pais       String?  @map("Pais")
+  Rua        String?  @map("Rua")
+  ID_Cliente Int?     @map("ID_Cliente") // Mudado para Int?
+  Cliente    Cliente? @relation("Cliente_Endereco", fields: [ID_Cliente], references: [ID_Cliente])
+  Compra     Compra[]
+}
+
+model Categoria {
+  ID_Categoria  Int            @id @map("ID_Categoria")
+  Nome          String?        @map("Nome")
+  Subcategorias Subcategoria[] @relation("Subcategoria_Categoria")
+}
+
+model Subcategoria {
+  idSubcategoria Int       @id @map("id_Subcategoria")
+  ID_Categoria   Int       @map("ID_Categoria")
+  Nome           String?   @map("Nome")
+  Categoria      Categoria @relation("Subcategoria_Categoria", fields: [ID_Categoria], references: [ID_Categoria])
+  Produto        Produto[]
+}
+
+model Produto {
+  idProduto                  Int                 @id @map("idProduto")
+  idSubcategoria             Int                 @map("id_Subcategoria")
+  Modelo                     String?             @map("Modelo")
+  Fabricante                 String?             @map("Fabricante")
+  Preco                      Decimal?            @map("Preço")
+  Quantidade_Disponivel      Int?                @map("Quantidade_Disponivel") // Corrigido para Int?
+  NumerosDeSerie             NumeroDeSerie[]     @relation("Produto_NumeroDeSerie") // Corrigir a relação inversa no modelo NumeroDeSerie
+  ProdutosComprados          ProdutosComprados[]
+  Subcategoria               Subcategoria?       @relation(fields: [subcategoriaIdSubcategoria], references: [idSubcategoria])
+  subcategoriaIdSubcategoria Int?
+}
+
+model NumeroDeSerie {
+  idNumeroDeSerie Int     @id @map("idNumero de Série")
+  idProduto       Int     @map("idProduto")
+  Produto         Produto @relation("Produto_NumeroDeSerie", fields: [idProduto], references: [idProduto])
+}
+
+model Compra {
+  idCompra        Int       @id @map("idCompra")
+  ID_Cliente      Int?      @map("ID_Cliente")
+  Data_Hora       DateTime? @map("Data_Hora")
+  Desconto        Decimal?  @map("Desconto")
+  Forma_Pagamento String?   @map("Forma_Pagamento")
+  Total_Compra    Decimal?  @map("Total_Compra")
+  IdEndereco      Int?      @map("IdEndereço")
+  Cliente         Cliente?  @relation(fields: [ID_Cliente], references: [ID_Cliente])
+  Endereco        Endereco? @relation(fields: [IdEndereco], references: [idEndereco])
+
+  ProdutosComprados ProdutosComprados[]
+}
+
+model ProdutosComprados {
+  id             Int      @id @default(autoincrement())
+  idCompra       Int?     @map("IdCompra")
+  idProduto      Int?     @map("IdProduto")
+  quantidade     Int?     @map("Quantidade") // Corrigido para Int?
+  produto        Produto? @relation(fields: [idProduto], references: [idProduto])
+  compraIdCompra Int?
+
+  Compra Compra? @relation(fields: [compraIdCompra], references: [idCompra])
+}
