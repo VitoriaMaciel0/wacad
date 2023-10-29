@@ -6,7 +6,7 @@ async function createCliente() {
   try {
     const novoCliente = await prisma.cliente.create({
       data: {
-        ID_Cliente: 1, // Inserir o ID_Cliente desejado
+        ID_Cliente: 1, 
         NomeCli: 'Fulano de Tal',
         CpfCli: '123.456.789-00',
         celular: '123456789',
@@ -32,10 +32,10 @@ async function lerCliente() {
 async function atualizarCliente() {
   try {
     const clienteAtualizado = await prisma.cliente.update({
-      where: { ID_Cliente: 1 }, // Substitua "1" pelo ID do cliente que você deseja atualizar
+      where: { ID_Cliente: 1 }, 
       data: {
         NomeCli: 'Novo Nome',
-        // ... outros campos a serem atualizados
+        
       },
     });
     console.log('Cliente Atualizado:', clienteAtualizado);
@@ -47,7 +47,7 @@ async function atualizarCliente() {
 async function deletarCliente() {
   try {
     const clienteDeletado = await prisma.cliente.delete({
-      where: { ID_Cliente: 1 }, // Substitua "1" pelo ID do cliente que você deseja excluir
+      where: { ID_Cliente: 1 }, 
     });
     console.log('Cliente Deletado:', clienteDeletado);
   } catch (error) {

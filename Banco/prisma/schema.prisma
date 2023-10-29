@@ -11,15 +11,15 @@ generator client {
 }
 
 model Cliente {
-  ID_Cliente      Int        @id @map("ID_Cliente")
-  NomeCli         String?    @map("NomeCli")
-  CpfCli          String?    @unique @map("CpfCli")
-  celular         String?    @map("celular")
-  email           String?    @map("email")
-  Data_nascimento DateTime?  @map("Data_nascimento")
-  // Relacionamento com a tabela Endereço
-  enderecos       Endereco[] @relation("Cliente_Endereco")
-  Compra          Compra[]
+  ID_Cliente      Int       @id @map("ID_Cliente")
+  NomeCli         String?   @map("NomeCli")
+  CpfCli          String?   @unique @map("CpfCli")
+  celular         String?   @map("celular")
+  email           String?   @map("email")
+  Data_nascimento DateTime? @map("Data_nascimento")
+
+  enderecos Endereco[] @relation("Cliente_Endereco")
+  Compra    Compra[]
 }
 
 model Endereco {
@@ -28,7 +28,7 @@ model Endereco {
   Cep        String?  @map("Cep")
   Pais       String?  @map("Pais")
   Rua        String?  @map("Rua")
-  ID_Cliente Int?     @map("ID_Cliente") // Mudado para Int?
+  ID_Cliente Int?     @map("ID_Cliente")
   Cliente    Cliente? @relation("Cliente_Endereco", fields: [ID_Cliente], references: [ID_Cliente])
   Compra     Compra[]
 }
@@ -53,8 +53,8 @@ model Produto {
   Modelo                     String?             @map("Modelo")
   Fabricante                 String?             @map("Fabricante")
   Preco                      Decimal?            @map("Preço")
-  Quantidade_Disponivel      Int?                @map("Quantidade_Disponivel") // Corrigido para Int?
-  NumerosDeSerie             NumeroDeSerie[]     @relation("Produto_NumeroDeSerie") // Corrigir a relação inversa no modelo NumeroDeSerie
+  Quantidade_Disponivel      Int?                @map("Quantidade_Disponivel")
+  NumerosDeSerie             NumeroDeSerie[]     @relation("Produto_NumeroDeSerie")
   ProdutosComprados          ProdutosComprados[]
   Subcategoria               Subcategoria?       @relation(fields: [subcategoriaIdSubcategoria], references: [idSubcategoria])
   subcategoriaIdSubcategoria Int?
@@ -84,7 +84,7 @@ model ProdutosComprados {
   id             Int      @id @default(autoincrement())
   idCompra       Int?     @map("IdCompra")
   idProduto      Int?     @map("IdProduto")
-  quantidade     Int?     @map("Quantidade") // Corrigido para Int?
+  quantidade     Int?     @map("Quantidade")
   produto        Produto? @relation(fields: [idProduto], references: [idProduto])
   compraIdCompra Int?
 
