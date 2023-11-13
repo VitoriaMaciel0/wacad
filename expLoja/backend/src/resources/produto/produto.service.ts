@@ -1,5 +1,8 @@
 import { PrismaClient, Produto } from "@prisma/client";
 import { CreateProdutoDto, UpdateProdutoDto } from "./produto.types";
+import { TiposUsuarios } from "../tipoUsuario/tipoUsuario.constants";
+import { genSalt, hash } from "bcryptjs";
+
 const prisma = new PrismaClient();
 
 export const getAllProdutos = async (): Promise<Produto[]> => {

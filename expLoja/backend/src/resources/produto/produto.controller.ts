@@ -9,6 +9,7 @@ import {
 } from "./produto.service";
 import { CreateProdutoDto } from "./produto.types";
 
+
 const index = async (req: Request, res: Response) => {
   try {
     const produtos = await getAllProdutos();
@@ -19,6 +20,13 @@ const index = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
+  /*
+  #swagger.summary = "Adiciona um produto no banco"
+  #swagger.parameters['body'] = {
+    in: "body",
+    schema: { $ref: '#/definitions/CreateProdutoDto'}
+  }
+  */
   const produto = req.body as CreateProdutoDto;
   try {
     if (await buscaProdutoPorNome(produto.nome))
@@ -31,6 +39,15 @@ const create = async (req: Request, res: Response) => {
 };
 
 const read = async (req: Request, res: Response) => {
+   /*
+  #swagger.summary = "Retorna um produto"
+  #swagger.parameters['id'] = {
+    description:  'ID do produto'
+    #swagger.responses[200] ={
+      schema: { $ref: '#/definitions/Produto' }
+    }
+  }
+  */
   const { id } = req.params;
   try {
     const prod = await getProduto(id);
